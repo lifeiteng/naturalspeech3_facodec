@@ -130,3 +130,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+audio/1_recon.wav
+audio/1_to_2.wav
