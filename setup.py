@@ -2,12 +2,13 @@ from setuptools import find_packages, setup
 
 setup(
     name="ns3_codec",
-    version="0.2.0",
+    version="0.2.2",
     packages=find_packages(where="."),
     package_dir={"": "."},
     package_data={"": []},
     description="ns3_codec",
     author="The ns3_codec Development Team",
+    author_email='lifeiteng0422@163.com',
     long_description=open("ns3_codec/README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
     readme="ns3_codec/README.md",

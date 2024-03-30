@@ -11,9 +11,15 @@ This project is completely moved from [Amphion/models/codec/ns3_codec](https://g
 
 #### Install
 ```bash
+git clone https://github.com/lifeiteng/ns3_codec.git
+cd ns3_codec
+
 pip3 install torch==2.1.2 torchaudio==2.1.2
 pip3 install .
-# pip3 install -e .  # dev
+# pip3 install -e .  # dev mode
+
+# export HF_ENDPOINT=https://hf-mirror.com
+python test.py
 ```
 
 ## Overview
@@ -85,6 +91,10 @@ fa_decoder.eval()
 
 Inference
 ```python
+import librosa
+import torch
+import soundfile as sf
+
 test_wav_path = "test.wav"
 test_wav = librosa.load(test_wav_path, sr=16000)[0]
 test_wav = torch.from_numpy(test_wav).float()
@@ -128,11 +138,37 @@ with torch.no_grad():
 
 FACodec can achieve zero-shot voice conversion with FACodecEncoderV2/FACodecDecoderV2 or FACodecRedecoder
 ```python
+import librosa
+import torch
+import soundfile as sf
 from ns3_codec import FACodecEncoderV2, FACodecDecoderV2
 
 # Same parameters as FACodecEncoder/FACodecDecoder
-fa_encoder_v2 = FACodecEncoderV2(...)
-fa_decoder_v2 = FACodecDecoderV2(...)
+# fa_encoder_v2 = FACodecEncoderV2(...)
+# fa_decoder_v2 = FACodecDecoderV2(...)
+fa_encoder_v2 = FACodecEncoderV2(
+    ngf=32,
+    up_ratios=[2, 4, 5, 5],
+    out_channels=256,
+)
+
+fa_decoder_v2 = FACodecDecoderV2(
+    in_channels=256,
+    upsample_initial_channel=1024,
+    ngf=32,
+    up_ratios=[5, 5, 4, 2],
+    vq_num_q_c=2,
+    vq_num_q_p=1,
+    vq_num_q_r=3,
+    vq_dim=256,
+    codebook_dim=8,
+    codebook_size_prosody=10,
+    codebook_size_content=10,
+    codebook_size_residual=10,
+    use_gr_x_timbre=True,
+    use_gr_residual_f0=True,
+    use_gr_residual_phone=True,
+)
 
 encoder_v2_ckpt = hf_hub_download(repo_id="amphion/naturalspeech3_facodec", filename="ns3_facodec_encoder_v2.bin")
 decoder_v2_ckpt = hf_hub_download(repo_id="amphion/naturalspeech3_facodec", filename="ns3_facodec_decoder_v2.bin")
@@ -140,7 +176,15 @@ decoder_v2_ckpt = hf_hub_download(repo_id="amphion/naturalspeech3_facodec", file
 fa_encoder_v2.load_state_dict(torch.load(encoder_v2_ckpt))
 fa_decoder_v2.load_state_dict(torch.load(decoder_v2_ckpt))
 
+def load_audio(wav_path):
+  wav = librosa.load(wav_path, sr=16000)[0]
+  wav = torch.from_numpy(wav).float()
+  wav = wav.unsqueeze(0).unsqueeze(0)
+  return wav
+
 with torch.no_grad():
+  wav_a = load_audio("/Users/feiteng/speech/ns3_codec/audio/1.wav")
+  wav_b = load_audio("/Users/feiteng/speech/ns3_codec/audio/2.wav")
   enc_out_a = fa_encoder_v2(wav_a)
   prosody_a = fa_encoder_v2.get_prosody_feature(wav_a)
   enc_out_b = fa_encoder_v2(wav_b)
