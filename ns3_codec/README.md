@@ -5,6 +5,17 @@
 [![model](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Models-pink)](https://huggingface.co/amphion/naturalspeech3_facodec)
 [![hf](https://img.shields.io/badge/%F0%9F%A4%97%20HuggingFace-Spaces-yellow)](https://huggingface.co/spaces/amphion/naturalspeech3_facodec)
 
+## Project Origin
+This project is completely moved from [Amphion/models/codec/ns3_codec](https://github.com/open-mmlab/Amphion/tree/main/models/codec/ns3_codec)
+* [Amphion LICENSE](https://github.com/open-mmlab/Amphion/blob/main/LICENSE)
+
+#### Install
+```bash
+pip3 install torch==2.1.2 torchaudio==2.1.2
+pip3 install .
+# pip3 install -e .  # dev
+```
+
 ## Overview
 
 FACodec is a core component of the advanced text-to-speech (TTS) model NaturalSpeech 3. FACodec converts complex speech waveform into disentangled subspaces representing speech attributes of content, prosody, timbre, and acoustic details and reconstruct high-quality speech waveform from these attributes. FACodec decomposes complex speech into subspaces representing different attributes, thus simplifying the modeling of speech representation.
@@ -27,7 +38,7 @@ Research can use FACodec to develop different modes of TTS models, such as non-a
 
 Download the pre-trained FACodec model from HuggingFace: [Pretrained FACodec checkpoint](https://huggingface.co/amphion/naturalspeech3_facodec)
 
-Install Amphion
+~~Install Amphion~~
 ```bash
 git clone https://github.com/open-mmlab/Amphion.git
 ```
