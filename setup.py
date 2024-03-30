@@ -8,11 +8,10 @@ setup(
     package_data={"": []},
     description="ns3_codec",
     author="The ns3_codec Development Team",
-    long_description=open("cREADME.md", encoding="utf-8").read(),
+    long_description=open("ns3_codec/README.md", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    readme="README.md",
+    readme="ns3_codec/README.md",
     python_requires=">=3.8",
-    install_requires=[
-    ],
+    install_requires=[],
     include_package_data=True,
 )

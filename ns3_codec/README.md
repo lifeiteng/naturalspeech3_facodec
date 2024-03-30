@@ -34,7 +34,7 @@ git clone https://github.com/open-mmlab/Amphion.git
 
 Few lines of code to use the pre-trained FACodec model
 ```python
-from Amphion.models.codec.ns3_codec import FACodecEncoder, FACodecDecoder
+from ns3_codec import FACodecEncoder, FACodecDecoder
 from huggingface_hub import hf_hub_download
 
 fa_encoder = FACodecEncoder(
@@ -117,7 +117,7 @@ with torch.no_grad():
 
 FACodec can achieve zero-shot voice conversion with FACodecEncoderV2/FACodecDecoderV2 or FACodecRedecoder
 ```python
-from Amphion.models.codec.ns3_codec import FACodecEncoderV2, FACodecDecoderV2
+from ns3_codec import FACodecEncoderV2, FACodecDecoderV2
 
 # Same parameters as FACodecEncoder/FACodecDecoder
 fa_encoder_v2 = FACodecEncoderV2(...)
@@ -149,7 +149,7 @@ with torch.no_grad():
 or
 
 ```python
-from Amphion.models.codec.ns3_codec import FACodecRedecoder
+from ns3_codec import FACodecRedecoder
 
 fa_redecoder = FACodecRedecoder()
 
