@@ -134,4 +134,4 @@ with torch.no_grad():
 
   vq_post_emb_a_to_b = fa_decoder_v2.vq2emb(vq_id_a, use_residual=False)
   recon_wav_a_to_b = fa_decoder_v2.inference(vq_post_emb_a_to_b, spk_embs_b)
-  sf.write("/Users/feiteng/speech/ns3_codec/audio/1_to_2.wav", recon_wav_a_to_b[0][0].cpu().numpy(), 16000)
+  sf.write("./audio/1_to_2_vc.wav", recon_wav_a_to_b[0][0].cpu().numpy(), 16000)

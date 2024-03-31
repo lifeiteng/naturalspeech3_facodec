@@ -19,7 +19,7 @@ pip3 install .
 # pip3 install -e .  # dev mode
 
 # export HF_ENDPOINT=https://hf-mirror.com
-python test.py
+python test.py # write audio/1_recon.wav audio/1_to_2_vc.wav
 ```
 
 ## Overview
