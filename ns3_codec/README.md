@@ -11,8 +11,8 @@ This project is completely moved from [Amphion/models/codec/ns3_codec](https://g
 
 #### Install
 ```bash
-git clone https://github.com/lifeiteng/ns3_codec.git
-cd ns3_codec
+git clone https://github.com/lifeiteng/naturalspeech3_facodec.git
+cd naturalspeech3_facodec
 
 pip3 install torch==2.1.2 torchaudio==2.1.2
 pip3 install .
